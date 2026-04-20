@@ -1,26 +1,90 @@
-import pandas as pd
-from sklearn.preprocessing import LabelEncoder
+🌳 Decision Tree Classification
+
+📌 Overview
+
+This project demonstrates the implementation of a Decision Tree Classifier for a classification problem using Python and Scikit-learn.
+
+---
+
+🎯 Objective
+
+- Understand how Decision Trees work
+- Build a classification model
+- Visualize and evaluate model performance
+
+---
+
+🧠 What is a Decision Tree?
+
+A Decision Tree is a supervised machine learning algorithm used for classification and regression.
+It splits data into branches based on feature values to make predictions.
+
+---
+
+⚙️ Technologies Used
+
+- Python 🐍
+- Pandas
+- Matplotlib
+- Scikit-learn
+
+---
+
+🔄 Workflow
+
+1. Load dataset
+2. Preprocess data
+3. Split into training and testing sets
+4. Train Decision Tree model
+5. Make predictions
+6. Evaluate performance
+
+---
+
+🧪 Implementation
+
 from sklearn.tree import DecisionTreeClassifier
-import pickle
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 
-# Load data
-path = "https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-ML0101EN-SkillsNetwork/labs/Module%203/data/drug200.csv"
-data = pd.read_csv(path)
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
-# Encode data
-le = LabelEncoder()
-data['Sex'] = le.fit_transform(data['Sex'])
-data['BP'] = le.fit_transform(data['BP'])
-data['Cholesterol'] = le.fit_transform(data['Cholesterol'])
-data['Drug'] = le.fit_transform(data['Drug'])
+# Model
+model = DecisionTreeClassifier(max_depth=3)
 
-# Split
-X = data.drop('Drug', axis=1)
-y = data['Drug']
+# Train
+model.fit(X_train, y_train)
 
-# Train model
-model = DecisionTreeClassifier()
-model.fit(X, y)
+# Predict
+y_pred = model.predict(X_test)
 
-# Save model
-pickle.dump(model, open('model.pkl', 'wb'))
+# Accuracy
+print("Accuracy:", accuracy_score(y_test, y_pred))
+
+---
+
+📈 Output
+
+- Model Accuracy: ~85–95% (depends on dataset)
+
+
+
+📌 Key Concepts
+
+- Tree structure (nodes, branches, leaves)
+- Overfitting and max_depth
+- Feature-based splitting
+
+---
+
+▶️ How to Run
+
+pip install pandas matplotlib scikit-learn
+jupyter notebook
+
+---
+
+👨‍💻 Author
+
+Manush
